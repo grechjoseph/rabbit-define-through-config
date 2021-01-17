@@ -2,11 +2,13 @@
 In this project, each exchange and queue properties are defined in the application.yml file.
 
 <h2>Getting Started</h2>
-# Add dependency: <b>spring-cloud-stream-binder-rabbit</b>
-# Create the channel class (eg: DirectChannels.class) in your code.
-# Add @EnableBinding(DirectChannels.class) for each interface class with channels defined.
-# Publishing to channel: directChannels.myChannel().send(MessageBuilder.withPayload(x).build()). (replace directChannel with the channel class being used).
-# Consumer: Annotate method with @StreamListener(<CHANNEL-NAME>), where CHANNEL-NAME is a String name of the channel being listened to in this listener.
+<ol>
+<li>Add dependency: <b>spring-cloud-stream-binder-rabbit</b></li>li>
+<li>Create the channel class (eg: DirectChannels.class) in your code.</li>li>
+<li>Add @EnableBinding(DirectChannels.class) for each interface class with channels defined.</li>li>
+<li>Publishing to channel: directChannels.myChannel().send(MessageBuilder.withPayload(x).build()). (replace directChannel with the channel class being used).</li>li>
+<li>Consumer: Annotate method with @StreamListener(CHANNEL-NAME), where CHANNEL-NAME is a String name of the channel being listened to in this listener.</li>
+</ol>
 
 <h2>Configuration</h2>
 <h3>Example</h3>
