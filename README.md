@@ -3,10 +3,14 @@ In this project, each exchange and queue properties are defined in the applicati
 
 <h2>Getting Started</h2>
 1. Add dependency: <b>spring-cloud-stream-binder-rabbit</b>
+
 2. Create the channel class (eg: DirectChannels.class) in your code.
+
 3. Add @EnableBinding(DirectChannels.class) for each interface class with channels defined.
+
 4. Publishing to channel: directChannels.myChannel().send(MessageBuilder.withPayload(x).build()). (replace directChannel with the channel class being used).
-4. Consumer: Annotate method with @StreamListener(<CHANNEL-NAME>), where CHANNEL-NAME is a String name of the channel being listened to in this listener.
+
+5. Consumer: Annotate method with @StreamListener(<CHANNEL-NAME>), where CHANNEL-NAME is a String name of the channel being listened to in this listener.
 
 <h2>Configuration</h2>
 <h3>Example</h3>
@@ -198,4 +202,4 @@ On startup of producer, creates exchange <b>myTopicExchange</b> with type <b>top
 <b>spring.cloud.stream.rabbit.my-topic-queue-1.consumer.bindingRoutingKey = '1'</b>
 
 On startup of producer, creates exchange <b>myTopicExchange</b> with type <b>topic</b>, setting it to pass the value of 'payload.value1' as the routingKey.
-Also, creates queue <b>myTopicQueue1</b> and binds it to exchange <b>myTopicExchange</b> with <b>routingKey='abc'</b>.
+Also, creates queue <b>myTopicQueue1</b> and binds it to exchange <b>myTopicExchange</b> with <b>routingKey='1'</b>.
