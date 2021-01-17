@@ -46,8 +46,9 @@ Likewise, this can be set on the consumer application with:
 
 
 
-
+<hr/>
 <h3>Direct Exchange Properties</h3>
+<hr/>
 <b>spring.cloud.stream.bindings.my-direct-exchange.destination = myDirectExchange</b>
 
 Binds channel <b>my-direct-exchange</b> to exchange <b>myDirectExchange</b>.
@@ -88,8 +89,9 @@ Also, creates queue <b>myDirectQueue1</b> and binds it to exchange <b>myDirectEx
 
 
 
-
+<hr/>
 <h3>Fanout Exchange Properties</h3>
+<hr/>
 <b>spring.cloud.stream.bindings.my-fanout-exchange.destination = myFanoutExchange</b>
 
 Binds channel <b>my-fanout-exchange</b> to exchange <b>myFanoutExchange</b>.
@@ -125,8 +127,9 @@ Also, creates queue <b>myFanoutQueue1</b> and binds it to exchange <b>myDirectEx
 
 
 
-
+<hr/>
 <h3>Header Exchange Properties</h3>
+<hr/>
 <b>spring.cloud.stream.bindings.my-header-exchange.destination = myDirectExchange</b>
 
 Binds channel <b>my-header-exchange</b> to exchange <b>myHeaderExchange</b>.
@@ -166,8 +169,9 @@ Also, creates queue <b>myHeaderQueue1</b> and binds it to exchange <b>myHeaderEx
 
 
 
-
+<hr/>
 <h3>Topic Exchange Properties</h3>
+<hr/>
 <b>spring.cloud.stream.bindings.my-topic-exchange.destination = myTopicExchange</b>
 
 Binds channel <b>my-topic-exchange</b> to exchange <b>myTopicExchange</b>.
@@ -188,7 +192,7 @@ Binds queue <b>myTopicQueue1</b> to exchange <b>myTopicExchange</b>, binding thi
 <hr/>
 <b>spring.cloud.stream.rabbit.my-topic-exchange.producer.exchangeType = topic</b>
 
-<b>spring.cloud.stream.rabbit.my-topic-exchange.producer.routingKeyExpression: 'payload.value1</b>
+<b>spring.cloud.stream.rabbit.my-topic-exchange.producer.routingKeyExpression = 'payload.value1</b>
 
 On startup of producer, creates exchange <b>myTopicExchange</b> with type <b>topic</b>, setting it to pass the value of 'payload.value1'as the routingKey.
 
