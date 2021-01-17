@@ -1,0 +1,159 @@
+server.port: 8018
+
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      default:
+        contentType: application/json
+      bindings:
+
+        # DIRECT
+        # Exchange
+        my-direct-exchange: # Channel Name
+          destination: myDirectExchange
+        # Queues
+        my-direct-queue-1: # Channel Name
+          destination: myDirectExchange
+          group: myDirectQueue1
+        my-direct-queue-2: # Channel Name
+          destination: myDirectExchange
+          group: myDirectQueue2
+        my-direct-queue-3: # Channel Name
+          destination: myDirectExchange
+          group: myDirectQueue3
+
+        # FANOUT
+        # Exchange
+        my-fanout-exchange: # Channel Name
+          destination: myFanoutExchange
+        # Queues
+        my-fanout-queue-1: # Channel Name
+          destination: myFanoutExchange
+          group: myFanoutQueue1
+        my-fanout-queue-2: # Channel Name
+          destination: myFanoutExchange
+          group: myFanoutQueue2
+        my-fanout-queue-3: # Channel Name
+          destination: myFanoutExchange
+          group: myFanoutQueue3
+
+        # HEADER
+        # Exchange
+        my-header-exchange: # Channel Name
+          destination: myHeaderExchange
+        # Queues
+        my-header-queue-1: # Channel Name
+          destination: myHeaderExchange
+          group: myHeaderQueue1
+        my-header-queue-2: # Channel Name
+          destination: myHeaderExchange
+          group: myHeaderQueue2
+        my-header-queue-3: # Channel Name
+          destination: myHeaderExchange
+          group: myHeaderQueue3
+
+        # TOPIC
+        # Exchange
+        my-topic-exchange: # Channel Name
+          destination: myTopicExchange
+        # Queues
+        my-topic-queue-1: # Channel Name
+          destination: myTopicExchange
+          group: myTopicQueue1
+        my-topic-queue-2: # Channel Name
+          destination: myTopicExchange
+          group: myTopicQueue2
+        my-topic-queue-3: # Channel Name
+          destination: myTopicExchange
+          group: myTopicQueue3
+      rabbit:
+        bindings:
+          my-direct-exchange:
+            producer:
+              exchangeType: direct
+              routingKeyExpression: 'payload.value1'
+          # Will act as fanout if payload.value1 = abc (matches all queue bindings).
+          my-direct-queue-1:
+            consumer:
+              exchangeType: direct
+              # payload.value1 = abc
+              bindingRoutingKey: 'abc'
+          my-direct-queue-2:
+            consumer:
+              exchangeType: direct
+              # payload.value1 = abc
+              bindingRoutingKey: 'abc'
+          my-direct-queue-3:
+            consumer:
+              exchangeType: direct
+              # payload.value1 = abc
+              bindingRoutingKey: 'abc'
+
+          my-fanout-exchange:
+            producer:
+              exchangeType: fanout
+          my-fanout-queue-1:
+            consumer:
+              exchangeType: fanout
+          my-fanout-queue-2:
+            consumer:
+              exchangeType: fanout
+          my-fanout-queue-3:
+            consumer:
+              exchangeType: fanout
+
+          my-header-exchange:
+            producer:
+              exchangeType: headers
+          my-header-queue-1:
+            consumer:
+              exchangeType: headers
+              # header1 = 1 AND header2 = 1
+              queueBindingArguments:
+                x-match: all
+                header1: '1'
+                header2: '1'
+          my-header-queue-2:
+            consumer:
+              # header1 = 2 AND header2 = 2
+              exchangeType: headers
+              queueBindingArguments:
+                x-match: all
+                header1: '2'
+                header2: '2'
+          my-header-queue-3:
+            consumer:
+              exchangeType: headers
+              # header1 = 2 OR header2 = 2
+              queueBindingArguments:
+                x-match: any
+                header1: '2'
+                header2: '2'
+
+          my-topic-exchange:
+            producer:
+              exchangeType: topic
+              # set routingKey value to the value of field 'value1' from payload.
+              routingKeyExpression: 'payload.value1'
+          # Will publish to queue which has bindingRoutingKey value matching routingKeyExpression.
+          my-topic-queue-1:
+            consumer:
+              exchangeType: topic
+              # if routingKey = '1'
+              bindingRoutingKey: '1'
+          my-topic-queue-2:
+            consumer:
+              exchangeType: topic
+              # if routingKey = '2'
+              bindingRoutingKey: '2'
+          my-topic-queue-3:
+            consumer:
+              exchangeType: topic
+              # if routingKey = '3'
+              bindingRoutingKey: '3'
+
